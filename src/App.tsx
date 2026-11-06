@@ -3,6 +3,30 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
+  const [message, setMessage] = useState('');
+  
+
+  const sendMessage = async () => {
+  if (!message.trim()) return;
+
+  const response = await fetch('http://localhost:11434/api/generate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'deepseek-r1:1.5b',
+      prompt: message,
+      stream: false,
+    }),
+  });
+
+  const data = await response.json();
+
+  console.log('AI response:', data.response);
+};
+
+
   return (
     <div className="app">
       <header className="header">
@@ -21,8 +45,10 @@ function App() {
         <input
           type="text"
           placeholder="Message NYRA..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
-        <button>Send</button>
+        <button onClick={sendMessage}>Send</button>
       </footer>
     </div>
   );
