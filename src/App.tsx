@@ -1,3 +1,4 @@
+
 import './App.css';
 import { useState } from 'react';
 
@@ -5,7 +6,7 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>NYRA</h1>
+        <img src="/favicon.svg" alt="NYRA Logo" className="logo" />
         <span>Your AI Assistant</span>
       </header>
 
